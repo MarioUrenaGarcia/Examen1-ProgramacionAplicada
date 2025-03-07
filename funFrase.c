@@ -261,11 +261,3 @@ extern void seleccionaPalabras(char nombreArchivo[], int tamanioPalabra)
     imprimirArreglo(arregloPalabras, totalPalabras, tamanioPalabra);
     return;
 }
-/**
- * @brief
- * @date
- * @author
- * @param
- * @return
- * @Ejemplo
- */
