@@ -20,3 +20,9 @@
 #define CYAN "\x1b[36m"
 
 // Declaración de estructuras -------------------------------------------------------------
+struct palabra
+{
+    char palabra[50];
+    int tamanio;
+};
+typedef struct palabra tipoPalabra;

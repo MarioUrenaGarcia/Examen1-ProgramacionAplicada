@@ -7,13 +7,26 @@
  */
 
 // Funciones ----------------------------------------------------------------------------
+void imprimirArreglo(tipoPalabra arregloPalabras[], int totalPalabras)
+{
+    printf(YELLOW "\n\n\tPalabras de la Frase\n" RESET);
+    for (int i = 0; i < totalPalabras; i++)
+    {
+        printf("\n%s\t%d", arregloPalabras[i].palabra, arregloPalabras[i].tamanio);
+    }
+    printf("\n\n");
+    return;
+}
 
-void dividirFrase(char nombreArchivo[])
+extern void dividirFrase(char nombreArchivo[])
 {
     FILE *archivo;
     FILE *vocales;
     FILE *consonantes;
     char palabra[50];
+    int contarVocales = 0;
+    int contarConsonantes = 0;
+    int i;
 
     // Buscar vocales--------------------------------------------------------------------
     vocales = fopen("Vocal.txt", "w");
@@ -22,6 +35,8 @@ void dividirFrase(char nombreArchivo[])
         printf(RED "\n\n\tERROR: No se pudo abrir el archivo Vocal.txt" RESET);
         exit(1);
     }
+
+    // Contar cuantas palabras con vocales hay
     // Abrir archivo de la frase
     archivo = fopen(nombreArchivo, "r");
     if (archivo == NULL)
@@ -30,17 +45,56 @@ void dividirFrase(char nombreArchivo[])
         printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
         exit(1);
     }
-    // Leer archivo y buscar vocales
     while (fscanf(archivo, "%s", palabra) != EOF)
     {
         if (palabra[0] == 'a' || palabra[0] == 'e' || palabra[0] == 'i' || palabra[0] == 'o' || palabra[0] == 'u' || palabra[0] == 'A' || palabra[0] == 'E' || palabra[0] == 'I' || palabra[0] == 'O' || palabra[0] == 'U')
         {
-            fprintf(vocales, "%s ", palabra);
+            contarVocales++;
         }
+    }
+    printf("\nTotal de palabras con vocales: %d\n", contarVocales);
+    fclose(archivo);
+
+    // Abrir archivo de la frase
+    archivo = fopen(nombreArchivo, "r");
+    if (archivo == NULL)
+    {
+        fclose(vocales);
+        printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
+        exit(1);
+    }
+
+    //  Leer archivo y buscar vocales
+    // Abrir archivo de la frase
+    archivo = fopen(nombreArchivo, "r");
+    if (archivo == NULL)
+    {
+        fclose(vocales);
+        printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
+        exit(1);
+    }
+
+    i = 1;
+
+    while (fscanf(archivo, "%s", palabra) != EOF)
+    {
+        if (palabra[0] == 'a' || palabra[0] == 'e' || palabra[0] == 'i' || palabra[0] == 'o' || palabra[0] == 'u' || palabra[0] == 'A' || palabra[0] == 'E' || palabra[0] == 'I' || palabra[0] == 'O' || palabra[0] == 'U')
+        {
+            if (i == contarVocales)
+            {
+                fprintf(vocales, "%s", palabra);
+            }
+            else
+            {
+                fprintf(vocales, "%s ", palabra);
+            }
+        }
+        i = i + 1;
     }
     fclose(archivo);
     fclose(vocales);
 
+    printf("\n\n\tArchivo Vocal.txt creado con éxito\n\n");
     // Buscar consonantes----------------------------------------------------------------
     consonantes = fopen("Consonante.txt", "w");
     if (consonantes == NULL)
@@ -48,6 +102,27 @@ void dividirFrase(char nombreArchivo[])
         printf(RED "\n\n\tERROR: No se pudo abrir el archivo Consonante.txt" RESET);
         exit(1);
     }
+
+    // Contar cuantas palabras con consonantes hay
+    archivo = fopen(nombreArchivo, "r");
+    if (archivo == NULL)
+    {
+        fclose(consonantes);
+        printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
+        exit(1);
+    }
+
+    while (fscanf(archivo, "%s", palabra) != EOF)
+    {
+        if (palabra[0] != 'a' && palabra[0] != 'e' && palabra[0] != 'i' && palabra[0] != 'o' && palabra[0] != 'u' && palabra[0] != 'A' && palabra[0] != 'E' && palabra[0] != 'I' && palabra[0] != 'O' && palabra[0] != 'U')
+        {
+            contarConsonantes++;
+        }
+    }
+
+    printf("\nTotal de palabras con consonantes: %d\n", contarConsonantes);
+    fclose(archivo);
+
     // Abrir archivo de la frase
     archivo = fopen(nombreArchivo, "r");
     if (archivo == NULL)
@@ -56,13 +131,23 @@ void dividirFrase(char nombreArchivo[])
         printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
         exit(1);
     }
-    // Leer archivo y buscar consonantes
+
+    i = 1;
+
     while (fscanf(archivo, "%s", palabra) != EOF)
     {
         if (palabra[0] != 'a' && palabra[0] != 'e' && palabra[0] != 'i' && palabra[0] != 'o' && palabra[0] != 'u' && palabra[0] != 'A' && palabra[0] != 'E' && palabra[0] != 'I' && palabra[0] != 'O' && palabra[0] != 'U')
         {
-            fprintf(consonantes, "%s ", palabra);
+            if (i == contarConsonantes)
+            {
+                fprintf(consonantes, "%s", palabra);
+            }
+            else
+            {
+                fprintf(consonantes, "%s ", palabra);
+            }
         }
+        i = i + 1;
     }
     fclose(archivo);
     fclose(consonantes);
@@ -70,6 +155,63 @@ void dividirFrase(char nombreArchivo[])
     return;
 }
 
+extern void seleccionaPalabras(char nombreArchivo[], int tamanioPalabra)
+{
+    FILE *archivo;
+
+    int totalPalabras = 0;
+    int i = 0;
+
+    char palabra[50];
+    tipoPalabra *arregloPalabras;
+
+    // Abrir archivo de la frase
+    archivo = fopen(nombreArchivo, "r");
+    if (archivo == NULL)
+    {
+        printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
+        exit(1);
+    }
+
+    // Leer cuantas palabras tienen longitud igual o menor a la ingresada en tamanioPalabra
+    while (fscanf(archivo, "%s", palabra) != EOF)
+    {
+        if (strlen(palabra) <= tamanioPalabra)
+        {
+            totalPalabras++;
+        }
+    }
+    fclose(archivo);
+
+    // Reservar memoria para el arreglo de palabras
+    arregloPalabras = (tipoPalabra *)malloc(totalPalabras * sizeof(tipoPalabra));
+    if (arregloPalabras == NULL)
+    {
+        printf(RED "\n\n\tERROR: No se pudo reservar memoria para el arreglo de palabras\n\n" RESET);
+        exit(1);
+    }
+
+    // Guardar palabras en el arreglo
+    archivo = fopen(nombreArchivo, "r");
+    if (archivo == NULL)
+    {
+        printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
+        exit(1);
+    }
+
+    while (fscanf(archivo, "%s", palabra) != EOF)
+    {
+        if (strlen(palabra) <= tamanioPalabra)
+        {
+            strcpy(arregloPalabras[i].palabra, palabra);
+            arregloPalabras[i].tamanio = strlen(palabra);
+            i++;
+        }
+    }
+    // Imprimir palabras del arreglo
+    imprimirArreglo(arregloPalabras, totalPalabras);
+    return;
+}
 /**
  * @brief
  * @date
