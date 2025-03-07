@@ -7,6 +7,14 @@
  */
 
 // Funciones ----------------------------------------------------------------------------
+/**
+ * @brief Función que imprime las palabras que tienen un tamaño menor o igual al ingresado por el usuario en la línea de comandos.
+ * @date 07/marzo/2025
+ * @author Mario Ureña García
+ * @param arregloPalabras Arreglo de palabras que se van a imprimir.
+ * @param totalPalabras Cantidad de palabras en el arreglo.
+ * @param tamanioPalabra Tamaño de palabra ingresado por el usuario.
+ */
 void imprimirArreglo(tipoPalabra arregloPalabras[], int totalPalabras, int tamanioPalabra)
 {
     printf(YELLOW "\n\n\tImpresión de las palabras en frase.txt que tienen un tamaño de palabra <= %d:\n" RESET, tamanioPalabra);
@@ -18,6 +26,12 @@ void imprimirArreglo(tipoPalabra arregloPalabras[], int totalPalabras, int taman
     return;
 }
 
+/**
+ * @brief Función que divide una frase en dos archivos de texto: Vocal.txt y Consonante.txt.
+ * @date 07/marzo/2025
+ * @author Mario Ureña García
+ * @param nombreArchivo Nombre del archivo que contiene la frase.
+ */
 extern void dividirFrase(char nombreArchivo[])
 {
     FILE *archivo;
@@ -151,6 +165,13 @@ extern void dividirFrase(char nombreArchivo[])
     return;
 }
 
+/**
+ * @brief Función que selecciona las palabras que tienen un tamaño menor o igual al ingresado por el usuario en la línea de comandos.
+ * @date 07/marzo/2025
+ * @author Mario Ureña García
+ * @param nombreArchivo Nombre del archivo que contiene la frase.
+ * @param tamanioPalabra Tamaño de palabra ingresado por el usuario.
+ */
 extern void seleccionaPalabras(char nombreArchivo[], int tamanioPalabra)
 {
     FILE *archivo;
