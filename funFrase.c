@@ -99,6 +99,7 @@ int contarVocales(char nombreArchivo[])
 
     return vocales;
 }
+
 /**
  * @brief Función que imprime las palabras que tienen un tamaño menor o igual al ingresado por el usuario en la línea de comandos.
  * @date 07/marzo/2025
