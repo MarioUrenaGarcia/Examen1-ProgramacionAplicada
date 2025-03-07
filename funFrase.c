@@ -7,7 +7,13 @@
  */
 
 // Funciones ----------------------------------------------------------------------------
-
+/**
+ * @brief Función que cuenta cuantas palabras en la frase tienen consonantes.
+ * @date 07/marzo/2025
+ * @author Mario Ureña García
+ * @param nombreArchivo Nombre del archivo que contiene la frase.
+ * @return Cantidad de palabras que tienen consonantes.
+ */
 int contarConsonantes(char nombreArchivo[])
 {
     int consonantes = 0;
@@ -33,6 +39,13 @@ int contarConsonantes(char nombreArchivo[])
     return consonantes;
 }
 
+/**
+ * @brief Función que cuenta cuantas palabras en la frase tienen vocales.
+ * @date 07/marzo/2025
+ * @author Mario Ureña García
+ * @param nombreArchivo Nombre del archivo que contiene la frase.
+ * @return Cantidad de palabras que tienen vocales.
+ */
 int contarVocales(char nombreArchivo[])
 {
     int vocales = 0;
