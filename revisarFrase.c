@@ -17,7 +17,7 @@
 #include "defFrase.h"
 
 // Declaración de funciones --------------------------------------------------------------
-
+void dividirFrase(char nombreArchivo[]);
 // Main ---------------------------------------------------------------------------------
 
 int main(int argc, char *argv[])
@@ -31,6 +31,17 @@ int main(int argc, char *argv[])
     // Variables
 
     // Procesos
+    // Verificar que se ingresaron los argumentos necesarios
+    if (argc != 3)
+    {
+        printf(RED "\n\n\tERROR: Número de Argumentos Incorrecto" RESET);
+        printf("\n\tEjemplo de ejecución: $./revisarFrase.exe <nombre del archivo> <tamaño de la palabra>\n\n");
+        return 1;
+    }
+
+    // Dividir frase
+    dividirFrase(argv[1]);
+    printf(GREEN "\n\n Frase dividida en Vocales.txt y Consonante.txt\n\n" RESET);
 
     // FINALIZACIÓN DEL PROGRAMA
     printf("\n\n\tPrograma Finalizado con ÉXITO\n\n");
