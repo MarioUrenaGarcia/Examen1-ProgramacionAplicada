@@ -29,7 +29,7 @@ int contarConsonantes(char nombreArchivo[])
     }
     while (fscanf(archivo, "%s", palabra) != EOF)
     {
-        if (palabra[0] == 'a' || palabra[0] == 'e' || palabra[0] == 'i' || palabra[0] == 'o' || palabra[0] == 'u' || palabra[0] == 'A' || palabra[0] == 'E' || palabra[0] == 'I' || palabra[0] == 'O' || palabra[0] == 'U')
+        if (palabra[0] != 'a' && palabra[0] != 'e' && palabra[0] != 'i' && palabra[0] != 'o' && palabra[0] != 'u' && palabra[0] != 'A' && palabra[0] != 'E' && palabra[0] != 'I' && palabra[0] != 'O' && palabra[0] != 'U')
         {
             consonantes++;
         }
