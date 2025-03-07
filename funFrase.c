@@ -9,7 +9,7 @@
 // Funciones ----------------------------------------------------------------------------
 void imprimirArreglo(tipoPalabra arregloPalabras[], int totalPalabras, int tamanioPalabra)
 {
-    printf(YELLOW "\n\n\tImpresión de las palabras en frase.txt que tienen un tamaño de palabra <= %d:\n" RESET);
+    printf(YELLOW "\n\n\tImpresión de las palabras en frase.txt que tienen un tamaño de palabra <= %d:\n" RESET, tamanioPalabra);
     for (int i = 0; i < totalPalabras; i++)
     {
         printf("\n%s\t%d", arregloPalabras[i].palabra, arregloPalabras[i].tamanio);
