@@ -8,6 +8,35 @@
 
 // Funciones ----------------------------------------------------------------------------
 /**
+ * @brief Función que cuenta cuantas palabras hay en una frase.
+ * @date 07/marzo/2025
+ * @author Mario Ureña García
+ * @param nombreArchivo Nombre del archivo que contiene la frase.
+ * @return Cantidad de palabras en la frase.
+ */
+int contarPalabras(char nombreArchivo[])
+{
+    int palabras = 0;
+    char palabra[50];
+    FILE *archivo;
+
+    // Abrir archivo de la frase
+    archivo = fopen(nombreArchivo, "r");
+    if (archivo == NULL)
+    {
+        printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
+        exit(1);
+    }
+    while (fscanf(archivo, "%s", palabra) != EOF)
+    {
+        palabras++;
+    }
+    fclose(archivo);
+
+    return palabras;
+}
+
+/**
  * @brief Función que cuenta cuantas palabras en la frase tienen consonantes.
  * @date 07/marzo/2025
  * @author Mario Ureña García
@@ -85,7 +114,6 @@ void imprimirArreglo(tipoPalabra arregloPalabras[], int totalPalabras, int taman
     {
         printf("\n%s\t%d", arregloPalabras[i].palabra, arregloPalabras[i].tamanio);
     }
-    printf("\n\n");
     return;
 }
 
@@ -259,5 +287,46 @@ extern void seleccionaPalabras(char nombreArchivo[], int tamanioPalabra)
     }
     // Imprimir palabras del arreglo
     imprimirArreglo(arregloPalabras, totalPalabras, tamanioPalabra);
+    return;
+}
+
+/**
+ * @brief Función que imprime un archivo de texto.
+ * @date 07/marzo/2025
+ * @author Mario Ureña García
+ * @param nombreArchivo Nombre del archivo que se va a imprimir.
+ */
+extern void imprimirArchivo(char nombreArchivo[])
+{
+    FILE *archivo;
+    char palabra[50];
+    int totalPalabras = 0;
+    int i = 1;
+
+    totalPalabras = contarPalabras(nombreArchivo);
+
+    printf(YELLOW "\nFrase en %s:  " RESET, nombreArchivo);
+    // Abrir archivo de la frase
+    archivo = fopen(nombreArchivo, "r");
+    if (archivo == NULL)
+    {
+        printf(RED "\n\n\tERROR: No se pudo abrir el archivo %s" RESET, nombreArchivo);
+        exit(1);
+    }
+
+    while (fscanf(archivo, "%s", palabra) != EOF)
+    {
+        if (i == totalPalabras)
+        {
+            printf("%s", palabra);
+        }
+        else
+        {
+            printf("%s ", palabra);
+        }
+        i++;
+    }
+    printf("\n");
+    fclose(archivo);
     return;
 }

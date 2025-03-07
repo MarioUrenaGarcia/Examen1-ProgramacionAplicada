@@ -22,6 +22,7 @@
 // Declaración de funciones --------------------------------------------------------------
 void dividirFrase(char nombreArchivo[]);
 void seleccionaPalabras(char nombreArchivo[], int tamanioPalabra);
+void imprimirArchivo(char nombreArchivo[]);
 // Main ---------------------------------------------------------------------------------
 
 int main(int argc, char *argv[])
@@ -46,7 +47,8 @@ int main(int argc, char *argv[])
     // Dividir frase
     dividirFrase(argv[1]);
     printf(GREEN "\n\n\tFrase dividida en Vocales.txt y Consonante.txt\n\n" RESET);
-
+    imprimirArchivo("Vocal.txt");
+    imprimirArchivo("Consonante.txt");
     // Seleccionar palabras
     if (sscanf(argv[2], "%d", &tamanioPalabra) != 1)
     {
@@ -56,6 +58,6 @@ int main(int argc, char *argv[])
     seleccionaPalabras(argv[1], tamanioPalabra);
 
     // FINALIZACIÓN DEL PROGRAMA
-    printf("\n\n\tPrograma Finalizado con ÉXITO\n\n");
+    printf("\n\n\tPrograma Finalizado con " GREEN "ÉXITO\n\n" RESET);
     return 0;
 }
