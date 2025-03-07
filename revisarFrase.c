@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
     // Dividir frase
     dividirFrase(argv[1]);
-    printf(GREEN "\n\n Frase dividida en Vocales.txt y Consonante.txt\n\n" RESET);
+    printf(GREEN "\n\n\tFrase dividida en Vocales.txt y Consonante.txt\n\n" RESET);
 
     // Seleccionar palabras
     if (sscanf(argv[2], "%d", &tamanioPalabra) != 1)

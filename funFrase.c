@@ -52,7 +52,6 @@ extern void dividirFrase(char nombreArchivo[])
             contarVocales++;
         }
     }
-    printf("\nTotal de palabras con vocales: %d\n", contarVocales);
     fclose(archivo);
 
     // Abrir archivo de la frase
@@ -88,13 +87,11 @@ extern void dividirFrase(char nombreArchivo[])
             {
                 fprintf(vocales, "%s ", palabra);
             }
+            i++;
         }
-        i = i + 1;
     }
     fclose(archivo);
     fclose(vocales);
-
-    printf("\n\n\tArchivo Vocal.txt creado con éxito\n\n");
     // Buscar consonantes----------------------------------------------------------------
     consonantes = fopen("Consonante.txt", "w");
     if (consonantes == NULL)
@@ -120,7 +117,6 @@ extern void dividirFrase(char nombreArchivo[])
         }
     }
 
-    printf("\nTotal de palabras con consonantes: %d\n", contarConsonantes);
     fclose(archivo);
 
     // Abrir archivo de la frase
@@ -146,8 +142,8 @@ extern void dividirFrase(char nombreArchivo[])
             {
                 fprintf(consonantes, "%s ", palabra);
             }
+            i++;
         }
-        i = i + 1;
     }
     fclose(archivo);
     fclose(consonantes);
