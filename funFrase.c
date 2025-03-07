@@ -7,9 +7,9 @@
  */
 
 // Funciones ----------------------------------------------------------------------------
-void imprimirArreglo(tipoPalabra arregloPalabras[], int totalPalabras)
+void imprimirArreglo(tipoPalabra arregloPalabras[], int totalPalabras, int tamanioPalabra)
 {
-    printf(YELLOW "\n\n\tPalabras de la Frase\n" RESET);
+    printf(YELLOW "\n\n\tImpresión de las palabras en frase.txt que tienen un tamaño de palabra <= %d:\n" RESET);
     for (int i = 0; i < totalPalabras; i++)
     {
         printf("\n%s\t%d", arregloPalabras[i].palabra, arregloPalabras[i].tamanio);
@@ -209,7 +209,7 @@ extern void seleccionaPalabras(char nombreArchivo[], int tamanioPalabra)
         }
     }
     // Imprimir palabras del arreglo
-    imprimirArreglo(arregloPalabras, totalPalabras);
+    imprimirArreglo(arregloPalabras, totalPalabras, tamanioPalabra);
     return;
 }
 /**
